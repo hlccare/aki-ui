@@ -1,15 +1,14 @@
 <template>
-  <div>hi</div>
-  <Temp />
+  <div>
+    导航栏 | <router-link to="/">Temp</router-link> |
+    <router-link to="xxx">Temp2</router-link>
+  </div>
+  <hr />
+  <router-view />
 </template>
 
 <script>
-import Temp from "./components/Temp.vue";
-
 export default {
   name: "App",
-  components: {
-    Temp,
-  },
 };
 </script>
