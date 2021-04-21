@@ -1,7 +1,10 @@
 <template>
   <div>ButtonDemo</div>
   <div>
-    <Button @click="onClick" @focus="onClick" @mouseover="onClick">123</Button>
+    <Button>123</Button>
+    <Button theme="button">123</Button>
+    <Button theme="link">123</Button>
+    <Button theme="text">123</Button>
   </div>
 </template>
 <script lang='ts'>
