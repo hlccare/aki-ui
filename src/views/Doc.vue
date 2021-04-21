@@ -1,6 +1,6 @@
 <template>
   <div class="layout">
-    <Topnav class="nav"/>
+    <Topnav class="nav" />
     <div class="content">
       <aside v-if="asideVisible">
         <h2>组件列表</h2>
@@ -16,51 +16,50 @@
           </li>
           <li>
             <router-link to="/doc/tabs">Tabs 组件</router-link>
-
           </li>
         </ol>
       </aside>
-      <main><router-view/></main>
+      <main><router-view /></main>
     </div>
   </div>
 </template>
 <script lang="ts">
-import { inject, Ref } from 'vue'
-import Topnav from '../components/Topnav.vue'
-export default{
-  components:{Topnav},
-  setup(){
-        const asideVisible = inject<Ref<boolean>>('asideVisible') //get
-        return {asideVisible}
-    }
-}
+import { inject, Ref } from "vue";
+import Topnav from "../components/Topnav.vue";
+export default {
+  components: { Topnav },
+  setup() {
+    const asideVisible = inject<Ref<boolean>>("asideVisible"); //get
+    return { asideVisible };
+  },
+};
 </script>
 <style lang="scss" scoped>
-.layout{
+.layout {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  > .nav{
+  > .nav {
     flex-shrink: 0;
   }
-  > .content{
+  > .content {
     flex-grow: 1;
     padding-top: 60px;
     padding-left: 156px;
-    @media(max-width: 500px){
+    @media (max-width: 500px) {
       padding-left: 0;
     }
   }
 }
-.content{
+.content {
   display: flex;
-  > aside{
+  > aside {
     flex-shrink: 0;
   }
-  > main{
+  > main {
     flex-grow: 1;
     padding: 16px;
-    background: lightgreen;
+    background: white;
   }
 }
 aside {
@@ -81,7 +80,7 @@ aside {
     }
   }
 }
-main{
+main {
   overflow: hidden;
 }
 </style>
