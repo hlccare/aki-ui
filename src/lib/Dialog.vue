@@ -4,12 +4,11 @@
     <div class="aki-dialog-wrapper">
       <div class="aki-dialog">
         <header>
-          标题
+          <slot name="title" />
           <span @click="close" class="aki-dialog-close"></span>
         </header>
         <main>
-          <p>第一行</p>
-          <p>第二行</p>
+          <slot name="content" />
         </main>
         <footer>
           <Button level="main" @click="ok">OK</Button>

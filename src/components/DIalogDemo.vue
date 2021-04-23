@@ -7,7 +7,15 @@
     :closeOnClickOverlay="false"
     :ok="f1"
     :cancel="f2"
-  ></Dialog>
+  >
+    <template v-slot:title>
+      <strong>加粗标题</strong>
+    </template>
+    <template v-slot:content>
+      <div>1</div>
+      <div>2</div>
+    </template>
+  </Dialog>
 </template>
 <script lang='ts'>
 import Dialog from "../lib/Dialog.vue";
