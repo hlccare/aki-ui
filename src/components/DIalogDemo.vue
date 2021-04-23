@@ -16,11 +16,14 @@
       <div>2</div>
     </template>
   </Dialog>
+  <h1>示例2</h1>
+  <Button @click="show">show</Button>
 </template>
 <script lang='ts'>
 import Dialog from "../lib/Dialog.vue";
 import Button from "../lib/Button.vue";
 import { ref } from "vue";
+import { openDialog } from "../lib/openDialog";
 export default {
   components: { Dialog, Button },
   setup() {
@@ -32,7 +35,20 @@ export default {
       return false;
     };
     const f2 = () => {};
-    return { x, toggle, f1, f2 };
+    const show = () => {
+      openDialog({
+        title: () => "标题",
+        content: () => "你好",
+        ok: () => {
+          console.log("ok");
+        },
+        cancel: () => {
+          console.log("cancel");
+        },
+        closeOnClickOverlay: false,
+      });
+    };
+    return { x, toggle, f1, f2, show };
   },
 };
 </script>

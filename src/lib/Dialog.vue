@@ -1,21 +1,23 @@
 <template>
   <template v-if="visible">
-    <div @click="onClickOverlay" class="aki-dialog-overlay"></div>
-    <div class="aki-dialog-wrapper">
-      <div class="aki-dialog">
-        <header>
-          <slot name="title" />
-          <span @click="close" class="aki-dialog-close"></span>
-        </header>
-        <main>
-          <slot name="content" />
-        </main>
-        <footer>
-          <Button level="main" @click="ok">OK</Button>
-          <Button @click="cancel">cancel</Button>
-        </footer>
+    <Teleport to="body">
+      <div @click="onClickOverlay" class="aki-dialog-overlay"></div>
+      <div class="aki-dialog-wrapper">
+        <div class="aki-dialog">
+          <header>
+            <slot name="title" />
+            <span @click="close" class="aki-dialog-close"></span>
+          </header>
+          <main>
+            <slot name="content" />
+          </main>
+          <footer>
+            <Button level="main" @click="ok">OK</Button>
+            <Button @click="cancel">cancel</Button>
+          </footer>
+        </div>
       </div>
-    </div>
+    </Teleport>
   </template>
 </template>
 <script lang='ts'>
@@ -53,9 +55,8 @@ export default {
       }
     };
     const cancel = () => {
-      if (props.cancel && props.cancel() !== false) {
-        close();
-      }
+      props.cancel && props.cancel();
+      close();
     };
     return { close, onClickOverlay, ok, cancel };
   },
