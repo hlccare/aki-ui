@@ -21,7 +21,7 @@ export default {
       default: "normal",
     },
     disabled: {
-      type: String,
+      type: Boolean,
       default: false,
     },
     loading: {
