@@ -92,6 +92,9 @@ aside {
       > a {
         display: block;
         padding: 4px 16px;
+        &:hover {
+          border-bottom: none;
+        }
       }
       .router-link-active {
         background: white;
