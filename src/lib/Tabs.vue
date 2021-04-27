@@ -18,19 +18,13 @@
       <div class="aki-tabs-nav-indicator" ref="indicator"></div>
     </div>
     <div class="aki-tabs-content">
-      <Component
-        class="aki-tabs-content-item"
-        :class="{ selected: c.props.title === selected }"
-        v-for="(c, index) in defaults"
-        :key="index"
-        :is="c"
-      />
+      <component :is="current" :key="current.props.title" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { onMounted, onUpdated, ref, watchEffect } from "vue";
+import { computed, onMounted, onUpdated, ref, watchEffect } from "vue";
 import Tab from "../lib/Tab.vue";
 export default {
   props: {
@@ -52,18 +46,30 @@ export default {
       const indicatorLeft = resultLeft - containerLeft;
       indicator.value.style.left = indicatorLeft + "px";
     };
-    onMounted(() => watchEffect(x));
+    onMounted(() => watchEffect(x, { flush: "post" }));
     const defaults = context.slots.default();
     defaults.forEach((tag) => {
-      if (tag.type !== Tab) {
+      //@ts-ignore
+      if (tag.type.name !== Tab.name) {
         throw new Error("Tabs 子标签必须是Tab");
       }
+    });
+    const current = computed(() => {
+      return defaults.find((tag) => tag.props.title === props.selected);
     });
     const titles = defaults.map((tag) => tag.props.title);
     const select = (title: String) => {
       context.emit("update:selected", title);
     };
-    return { selectedItem, indicator, container, defaults, titles, select };
+    return {
+      selectedItem,
+      indicator,
+      container,
+      defaults,
+      titles,
+      select,
+      current,
+    };
   },
 };
 </script>
