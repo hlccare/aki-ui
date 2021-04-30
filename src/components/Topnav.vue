@@ -11,9 +11,9 @@
     <svg
       v-if="toggleMenuButtonVisible"
       class="toggleAside"
-      @click="toggleAside"
+      @click.stop="toggleAside"
     >
-      <use xlink:href="#icon-aside"></use>
+      <use xlink:href="#icon-menu"></use>
     </svg>
   </div>
 </template>
@@ -39,9 +39,11 @@ export default {
 $color: #007974;
 
 .topnav {
+  box-shadow: 0 0 15px rgb(226, 226, 226);
+  background: white;
   color: $color;
   display: flex;
-  padding: 16px;
+  padding: 8px 16px;
   position: fixed;
   top: 0;
   left: 0;
@@ -56,6 +58,9 @@ $color: #007974;
       height: 32px;
       width: 32px;
     }
+    &:hover {
+      border-bottom: none;
+    }
   }
   > .menu {
     display: flex;
@@ -66,14 +71,14 @@ $color: #007974;
     }
   }
   > .toggleAside {
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
     position: absolute;
     left: 16px;
     top: 50%;
     transform: translateY(-50%);
     display: none;
-    background: fade-out($color: black, $amount: 0.9);
+    background: fade-out($color: green, $amount: 0.9);
   }
   @media (max-width: 500px) {
     > .menu {
