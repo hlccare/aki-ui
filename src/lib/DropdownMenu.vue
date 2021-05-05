@@ -1,6 +1,17 @@
 <template>
-  <div>
-    dropdownMenu
+    <div class="aki-dropdown-menu-label" v-if="label">{{label}}</div>
     <slot />
-  </div>
 </template>
+
+<script lang="ts">
+export default {
+  props:{
+    label:{
+      type: String
+    }
+  }
+}
+</script>
+<style lang="scss">
+
+</style>

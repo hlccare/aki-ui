@@ -78,7 +78,7 @@ $aside-zindex: 10;
   transition: all 0.3s ease;
 }
 .slide-fade-enter-from, .slide-fade-leave-to
-/* .slide-fade-leave-active for below version 2.1.8 */ {
+{
   transform: translateX(-150px);
 }
 .layout {
