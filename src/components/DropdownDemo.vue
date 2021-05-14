@@ -1,42 +1,17 @@
 <template>
-  <Dropdown>
-      <span class="aki-dropdown-link">
-        下拉菜单<i class="lin-icon-arrow-down down"></i>
-      </span>
-      <template  v-slot:dropdownMenu>
-      <DropdownMenu>
-        <DropdownMenuItem>黄金糕</DropdownMenuItem>
-        <DropdownMenuItem>狮子头</DropdownMenuItem>
-        <DropdownMenuItem>螺蛳粉</DropdownMenuItem>
-        <DropdownMenuItem disabled>双皮奶</DropdownMenuItem>
-        <DropdownMenuItem divided>蚵仔煎</DropdownMenuItem>
-      </DropdownMenu>
-      </template>
-  </Dropdown>
-  <Dropdown trigger='click'>
-      <span class="aki-dropdown-link">
-        下拉菜单<i class="lin-icon-arrow-down down"></i>
-      </span>
-      <template  v-slot:dropdownMenu>
-      <DropdownMenu>
-        <DropdownMenuItem>黄金糕</DropdownMenuItem>
-        <DropdownMenuItem>狮子头</DropdownMenuItem>
-        <DropdownMenuItem>螺蛳粉</DropdownMenuItem>
-        <DropdownMenuItem disabled>双皮奶</DropdownMenuItem>
-        <DropdownMenuItem divided>蚵仔煎</DropdownMenuItem>
-      </DropdownMenu>
-      </template>
-  </Dropdown>
+  <Demo :component="Dropdown1Demo" />
+  <Demo :component="Dropdown2Demo" />
 </template>
 
 <script lang="ts">
-import Dropdown from "../lib/Dropdown.vue";
-import DropdownMenu from "../lib/DropdownMenu.vue";
-import DropdownMenuItem from '../lib/DropdownMenuItem.vue'
+import Demo from "./Demo.vue";
+import Dropdown1Demo from "./Dropdown1.demo.vue";
+import Dropdown2Demo from "./Dropdown2.demo.vue";
+
 export default {
-  components: { Dropdown, DropdownMenu,DropdownMenuItem },
+  components: { Demo },
   setup() {
-    return { Dropdown, DropdownMenu };
+    return { Dropdown1Demo, Dropdown2Demo };
   },
 };
 </script>
@@ -45,14 +20,11 @@ export default {
 .aki-dropdown-link {
   cursor: pointer;
   position: relative;
-    color: #409eff;
+  color: #409eff;
 
-  > i{
+  > i {
     border-color: #409eff;
   }
-}
-.aki-icon-arrow-down {
-  font-size: 12px;
 }
 i {
   border: solid black;

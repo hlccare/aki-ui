@@ -1,56 +1,80 @@
 <template>
-  <div @mouseenter='showMenu' @mouseleave='hideMenu'
-  @click="toggleMenu"
-  class="aki-dropdown" ref="dropdownContainer">
+  <div
+    @mouseenter="showMenu"
+    @mouseleave="hideMenu"
+    @click="toggleMenu"
+    class="aki-dropdown"
+    ref="dropdownContainer"
+  >
     <div class="aki-label" ref="dropdownLabel">
-    <slot />
+      <slot />
     </div>
     <transition name="dropdown-menu-fade">
       <div v-show="menuVisible" class="aki-menu-container" ref="menuContainer">
-      <slot name="dropdownMenu"/>
+        <slot name="dropdownMenu" />
       </div>
     </transition>
   </div>
 </template>
 <script lang="ts">
-import { InjectionKey, provide, ref } from 'vue'
+import { InjectionKey, onMounted, onUnmounted, provide, ref } from "vue";
 
 export default {
-  props:{
-    trigger:{
+  props: {
+    trigger: {
       type: String,
-      default: 'hover'
-    }
+      default: "hover",
+    },
   },
   setup(props) {
-    const {trigger} = props
+    const { trigger } = props;
     const menuVisible = ref(false);
     const menuContainer = ref(null);
-    
-    const dropdownContainer = ref(null)
-    const dropdownLabel = ref(null)
+
+    const dropdownContainer = ref(null);
+    const dropdownLabel = ref(null);
     // eslint:disable-next-line
-    provide(menuVisible ,'menuVisible') 
-    const showMenu = ()=>{
-      if(trigger==='hover'&&!menuVisible.value){
+    provide(menuVisible, "menuVisible");
+    const showMenu = () => {
+      if (trigger === "hover" && !menuVisible.value) {
         menuVisible.value = true;
       }
-    }
-    const hideMenu = ()=>{
-      if(trigger==='hover'&&menuVisible.value){
+    };
+    const hideMenu = () => {
+      if (trigger === "hover" && menuVisible.value) {
         menuVisible.value = false;
       }
-    }
-    const toggleMenu = ()=>{
-      if(trigger==='click'){
-        menuVisible.value = !menuVisible.value
+    };
+    const toggleMenu = () => {
+      if (trigger === "click") {
+        menuVisible.value = !menuVisible.value;
       }
-    }
-    return {menuVisible,showMenu,hideMenu,toggleMenu,menuContainer}
-
-
+    };
+    const onDocumentClick = (event) => {
+      if (!dropdownContainer.value.contains(event.target)) {
+        menuVisible.value = false;
+      }
+    };
+    onMounted(() => {
+      if (trigger === "click") {
+        document.addEventListener("click", onDocumentClick);
+      }
+    });
+    onUnmounted(() => {
+      if (trigger === "click") {
+        document.removeEventListener("click", onDocumentClick);
+      }
+    });
+    return {
+      menuVisible,
+      showMenu,
+      hideMenu,
+      toggleMenu,
+      menuContainer,
+      dropdownContainer,
+    };
   },
-}
+};
 </script>
 
 <style lang="scss">
@@ -64,11 +88,12 @@ export default {
 {
   opacity: 0;
 } */
-.aki-dropdown{
+.aki-dropdown {
   display: inline-block;
   position: relative;
 }
-.aki-menu-container{
+.aki-menu-container {
+  z-index: 10;
   border: 1px solid #cccccc;
   display: inline-flex;
   flex-direction: column;
@@ -80,8 +105,9 @@ export default {
   padding: 4px 0;
   border-radius: 5px;
   box-shadow: 0 0 3px rgb(190, 190, 190);
-  &:before{
-    content: '';
+  background: white;
+  &:before {
+    content: "";
     width: 0;
     height: 0;
     border: 8px solid transparent;
@@ -91,17 +117,16 @@ export default {
     bottom: 100%;
     transform: translateX(-50%);
   }
-  &:after{
+  &:after {
     content: "";
     width: 0;
     height: 0;
     border: 6px solid transparent;
-    border-bottom-color: #FFFFFF;
+    border-bottom-color: #ffffff;
     position: absolute;
     left: 50%;
     bottom: 100%;
     transform: translateX(-50%);
   }
 }
-
 </style>
