@@ -33,6 +33,9 @@
             <li>
               <router-link to="/doc/dropdown">Dropdown 组件</router-link>
             </li>
+            <li>
+              <router-link to="/doc/popover">Popover 组件</router-link>
+            </li>
           </ol>
         </aside>
       </transition>
@@ -77,8 +80,8 @@ $aside-zindex: 10;
 .slide-fade-leave-active {
   transition: all 0.3s ease;
 }
-.slide-fade-enter-from, .slide-fade-leave-to
-{
+.slide-fade-enter-from,
+.slide-fade-leave-to {
   transform: translateX(-150px);
 }
 .layout {

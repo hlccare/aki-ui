@@ -6,6 +6,8 @@ import ButtonDemo from './components/ButtonDemo.vue'
 import DialogDemo from './components/DialogDemo.vue'
 import TabsDemo from './components/TabsDemo.vue'
 import DropdownDemo from './components/DropdownDemo.vue'
+import PopoverDemo from './components/PopoverDemo.vue'
+
 import Markdown from './components/Markdown.vue'
 import { h } from 'vue';
 import intro from './markdown/intro.md'
@@ -32,7 +34,7 @@ export const router = createRouter({
                 { path: 'dialog', component: DialogDemo },
                 { path: 'tabs', component: TabsDemo },
                 { path: 'dropdown', component: DropdownDemo },
-
+                { path: 'popover', component: PopoverDemo },
             ]
         }
     ]
