@@ -1,5 +1,5 @@
 <template>
-  <div class="aki-popover" @click.stop="xxx" ref="popover">
+  <div class="aki-popover" @click="onClick" ref="popover">
     <Teleport to="body">
       <div class="aki-content-wrapper" v-if="visible" ref="contentWrapper">
         <slot name="content" />
@@ -13,7 +13,7 @@
 </template>
 
 <script lang='ts'>
-import { nextTick, onMounted, onUnmounted, ref, toRefs } from "vue";
+import { nextTick, ref } from "vue";
 
 export default {
   setup() {
@@ -21,32 +21,44 @@ export default {
     const popover = ref(null);
     const triggerWrapper = ref(null);
     const contentWrapper = ref(null);
-    const xxx = () => {
-      visible.value = !visible.value;
+    const locateContent = ()=>{
+      let { top, left } = triggerWrapper.value.getBoundingClientRect();
+        contentWrapper.value.style.top = top + window.scrollY + "px";
+        contentWrapper.value.style.left = left + window.scrollX + "px";
+    }
+    const onClickDocument = (event)=>{
+      if(triggerWrapper.value.contains(event.target)|| (contentWrapper.value && contentWrapper.value.contains(event.target))){
+        return 
+      }else{
+        close()
+      }
+    }
+    const open = ()=>{
+      visible.value = true
       nextTick(() => {
-        let { top, left } = triggerWrapper.value.getBoundingClientRect();
-        contentWrapper.value.style.top = top + "px";
-        contentWrapper.value.style.left = left + "px";
-      });
+        locateContent()
+        document.addEventListener('click',onClickDocument)
+        });
+    }
+    const close = ()=>{
+      visible.value = false;
+      document.removeEventListener('click',onClickDocument)
     };
-    const onDocumentClick = (event) => {
-      console.log(popover);
-      if (!popover.value.contains(event.target)) {
-        visible.value = false;
+    const onClick = (event) => {
+      if(triggerWrapper.value.contains(event.target)){
+        if(visible.value === false){
+          open()
+        }else{
+          close()
+        }
       }
     };
-    onMounted(() => {
-      document.addEventListener("click", onDocumentClick);
-    });
-    onUnmounted(() => {
-      document.removeEventListener("click", onDocumentClick);
-    });
-    return { visible, xxx, popover, triggerWrapper, contentWrapper };
+    return { visible, onClick, popover, triggerWrapper, contentWrapper };
   },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .aki-popover {
   display: inline-block;
   position: relative;
