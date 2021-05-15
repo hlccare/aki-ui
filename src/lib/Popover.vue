@@ -5,7 +5,7 @@
         <slot name="content" />
       </div>
     </Teleport>
-    <span ref="triggerWrapper">
+    <span ref="triggerWrapper" style="display:inline-block">
       <slot />
     </span>
     {{ visible }}
@@ -59,6 +59,8 @@ export default {
 </script>
 
 <style lang="scss">
+$border-color: #333;
+$border-radius: 4px;
 .aki-popover {
   display: inline-block;
   position: relative;
@@ -66,8 +68,35 @@ export default {
 .aki-content-wrapper {
   z-index: 10;
   position: absolute;
-  border: 1px solid grey;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  /* box-shadow: 0 0 3px rgba(0, 0, 0, 0.5); */
+  background: white;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.5));
   transform: translateY(-100%);
+  padding: 0.5em 1em;
+  margin-top: -10px;
+  max-width: 20em;
+  word-break: break-all;
+  &::before,&::after{
+    content:'';
+    display: block;
+    border: 10px solid transparent;
+    border-top-color: $border-color;
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 100%;
+    left: 10px;
+  }
+  &::before{
+    border-top-color: $border-color;
+    top: 100%;
+
+  }
+  &::after{
+    border-top-color: white;
+    top: calc(100% - 1px);
+  }
 }
 </style>

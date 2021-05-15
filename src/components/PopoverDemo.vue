@@ -4,7 +4,7 @@
       <div>popover内容1</div>
     </template>
     <template v-slot:default>
-      <button>点击</button>
+      <Button>点击</Button>
     </template>
   </Popover>
   <Popover>
@@ -12,15 +12,17 @@
       <div>popover内容2</div>
     </template>
     <template v-slot:default>
-      <button>点击</button>
+      <Button>点击</Button>
     </template>
   </Popover>
 </template>
 
 <script>
 import Popover from "../lib/Popover.vue";
+import Button from "../lib/Button.vue";
+
 export default {
-  components: { Popover },
+  components: { Popover,Button },
   setup() {
     return {};
   },
