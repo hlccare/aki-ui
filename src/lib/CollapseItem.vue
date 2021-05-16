@@ -17,6 +17,14 @@ export default defineComponent({
         title:{
             type: String,
             required: true
+        },
+        single:{
+            type: Boolean,
+            default: true
+        },
+        name:{
+            type: String,
+            required: true
         }
     },
     setup(props,context) {
@@ -26,10 +34,21 @@ export default defineComponent({
         const close = ()=>{
             open.value = false
         }
+        const show = ()=>{
+            open.value = true
+        }
         onMounted(()=>{
-            bus.on('update:selected',(vm)=>{
-                if(vm!==context){
-                    close()
+            console.log('children mounted')
+                bus.on('update:selected',(name)=>{
+                    console.log(props.name+'on')
+                    if(name!==props.name){
+                    console.log(props.name+'close')
+
+                        close()
+                    }else{
+                    console.log(props.name+'show')
+                        
+                        show()
                     }
                 });
         })
@@ -37,8 +56,8 @@ export default defineComponent({
             if(open.value){
                 open.value = false
             }else{
-                open.value = true;
-                bus.emit('update:selected',context)
+                console.log(props.name+'emit')
+                bus.emit('update:selected',props.name )
             }
         }
         return{open,toggle}

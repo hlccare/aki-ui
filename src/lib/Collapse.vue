@@ -6,9 +6,31 @@
 </template>
 
 <script lang='ts'>
-import { provide, defineComponent } from 'vue'
+import { Emitter } from 'mitt'
+import { provide, defineComponent, getCurrentInstance, onMounted } from 'vue'
 export default defineComponent({
-    setup(){
+    props:{
+        selected:{
+            type: String,
+        }
+    },
+    setup(props, context){
+        const internalInstance = getCurrentInstance()
+        const bus:Emitter = internalInstance.appContext.config.globalProperties.$bus
+        onMounted(()=>{
+            console.log('collapse mounted')
+            bus.emit('update:selected',props.selected)
+            bus.on('update:selected',(name)=>{
+                console.log('collapse on')
+                console.log(name)
+                context.emit('update:selected',name)
+                console.log('collapse emit')
+
+            })
+        })
+        
+
+        
     }
 
 })

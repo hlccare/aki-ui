@@ -1,11 +1,12 @@
 <template>
-    <Collapse>
-        <collapse-item title="标题1">内容1</collapse-item>
-        <collapse-item title="标题2">内容2</collapse-item>
-        <collapse-item title="标题3">内容3</collapse-item>
-        <collapse-item title="标题4">内容4</collapse-item>
+    <Collapse v-model:selected="selected">
+        <collapse-item title="标题1" name='1'>内容1</collapse-item>
+        <collapse-item title="标题2" name='2'>内容2</collapse-item>
+        <collapse-item title="标题3" name='3'>内容3</collapse-item>
+        <collapse-item title="标题4" name='4'>内容4</collapse-item>
 
     </Collapse>
+    {{selected}}
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
@@ -15,7 +16,8 @@ import CollapseItem from '../lib/CollapseItem.vue'
 export default defineComponent({
   components: { Collapse, CollapseItem },
     setup() {
-        
+        let selected = '3'
+        return {selected}
     },
 })
 </script>
