@@ -1,8 +1,11 @@
 <template>
 <div style="height: 100px;width: 100px;"></div>
   <Popover>
-    <template v-slot:content>
-      <div>popover内容1</div>
+    <template v-slot:content='slotProp'>
+      <div>popover内容1
+
+      <Button @click="slotProp.close">点击关闭</Button>
+      </div>
     </template>
     <template v-slot:default>
       <Button>点击</Button>
@@ -25,6 +28,39 @@
     </template>
   </Popover>
   <Popover position="right">
+    <template v-slot:content>
+      <div>popover内容2</div>
+    </template>
+    <template v-slot:default>
+      <Button>点击</Button>
+    </template>
+  </Popover>
+  <div style="height: 100px;width: 100px;"></div>
+  <Popover trigger="hover">
+    <template v-slot:content>
+      <div>popover内容1</div>
+    </template>
+    <template v-slot:default>
+      <Button>点击</Button>
+    </template>
+  </Popover>
+  <Popover position="bottom"  trigger="hover">
+    <template v-slot:content>
+      <div>popover内容2</div>
+    </template>
+    <template v-slot:default>
+      <Button>点击</Button>
+    </template>
+  </Popover>
+  <Popover position="left"  trigger="hover">
+    <template v-slot:content>
+      <div>popover内容2</div>
+    </template>
+    <template v-slot:default>
+      <Button>点击</Button>
+    </template>
+  </Popover>
+  <Popover position="right"  trigger="hover">
     <template v-slot:content>
       <div>popover内容2</div>
     </template>

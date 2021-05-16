@@ -1,8 +1,8 @@
 <template>
-  <div class="aki-popover" @click="onClick" ref="popover">
+  <div class="aki-popover" ref="popover">
     <Teleport to="body">
       <div class="aki-content-wrapper" :class="[`position-${position}`]" v-if="visible" ref="contentWrapper">
-        <slot name="content" />
+        <slot name="content" :close='close'/>
       </div>
     </Teleport>
     <span ref="triggerWrapper" style="display:inline-block">
@@ -12,21 +12,41 @@
 </template>
 
 <script lang='ts'>
-import { nextTick, ref } from "vue";
+import { nextTick, onMounted, onUnmounted, ref } from "vue";
 
 export default {
   props:{
     position:{
       type:String,
       default: 'top'
+    },
+    trigger:{
+      type: String,
+      default: 'click'
     }
   },
   setup(props) {
-    const {position} = props;
+    const {position, trigger} = props;
     const visible = ref(false);
     const popover = ref(null);
     const triggerWrapper = ref(null);
     const contentWrapper = ref(null);
+    onMounted(()=>{
+      if(trigger === 'click'){
+        popover.value.addEventListener('click',onClick)
+      }else{
+        popover.value.addEventListener('mouseenter',open)
+        popover.value.addEventListener('mouseleave',close)
+      }
+    })
+    onUnmounted(()=>{
+      if(trigger === 'click'){
+        popover.value.removeEventListener('click',onClick)
+      }else{
+        popover.value.removeEventListener('mouseenter',open)
+        popover.value.removeEventListener('mouseleave',close)
+      }
+    })
     const locateContent = ()=>{
       let {height,width, top, left } = triggerWrapper.value.getBoundingClientRect();
         let {height:height2} = contentWrapper.value.getBoundingClientRect()
@@ -78,7 +98,7 @@ export default {
         }
       }
     };
-    return { visible, onClick, popover, triggerWrapper, contentWrapper };
+    return { visible, onClick, popover, triggerWrapper, contentWrapper,close };
   },
 };
 </script>
@@ -113,6 +133,7 @@ $border-radius: 4px;
     transform: translateY(-100%);
     margin-top: -10px;
     &::before,&::after{
+      border-bottom:none;
       left: 10px;    
     }
     &::before{
@@ -127,7 +148,8 @@ $border-radius: 4px;
   &.position-bottom{
     margin-top: 10px;
     &::before,&::after{
-      left: 10px;    
+      left: 10px; 
+      border-top: none;   
     }
     &::before{
       border-bottom-color: $border-color;
@@ -143,7 +165,8 @@ $border-radius: 4px;
     margin-left: -10px;
     &::before,&::after{
       transform: translateY(-50%);
-      top: 50%;    
+      top: 50%; 
+      border-right: none;   
     }
     &::before{
       border-left-color: $border-color;
@@ -158,7 +181,8 @@ $border-radius: 4px;
     margin-left: 10px;
     &::before,&::after{
       transform: translateY(-50%);
-      top: 50%;    
+      top: 50%;  
+      border-left:none;  
     }
     &::before{
       border-right-color: $border-color;
