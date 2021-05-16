@@ -1,14 +1,13 @@
 <template>
   <div class="aki-popover" @click="onClick" ref="popover">
     <Teleport to="body">
-      <div class="aki-content-wrapper" v-if="visible" ref="contentWrapper">
+      <div class="aki-content-wrapper" :class="[`position-${position}`]" v-if="visible" ref="contentWrapper">
         <slot name="content" />
       </div>
     </Teleport>
     <span ref="triggerWrapper" style="display:inline-block">
       <slot />
     </span>
-    {{ visible }}
   </div>
 </template>
 
@@ -16,15 +15,41 @@
 import { nextTick, ref } from "vue";
 
 export default {
-  setup() {
+  props:{
+    position:{
+      type:String,
+      default: 'top'
+    }
+  },
+  setup(props) {
+    const {position} = props;
     const visible = ref(false);
     const popover = ref(null);
     const triggerWrapper = ref(null);
     const contentWrapper = ref(null);
     const locateContent = ()=>{
-      let { top, left } = triggerWrapper.value.getBoundingClientRect();
-        contentWrapper.value.style.top = top + window.scrollY + "px";
-        contentWrapper.value.style.left = left + window.scrollX + "px";
+      let {height,width, top, left } = triggerWrapper.value.getBoundingClientRect();
+        let {height:height2} = contentWrapper.value.getBoundingClientRect()
+      let x = {
+        top:{
+          top: top + window.scrollY,
+          left: left + window.scrollX,
+        },
+        bottom:{
+          top: top + window.scrollY + height,
+          left: left + window.scrollX
+        },
+        left:{
+          top: top + window.scrollY + (height-height2)/2,
+          left: left + window.scrollX,
+        },
+        right:{
+          top: top + window.scrollY + (height-height2)/2,
+          left: left + window.scrollX + width
+        }
+      }
+      contentWrapper.value.style.top = x[position].top + 'px';
+      contentWrapper.value.style.left = x[position].left + "px";
     }
     const onClickDocument = (event)=>{
       if(triggerWrapper.value.contains(event.target)|| (contentWrapper.value && contentWrapper.value.contains(event.target))){
@@ -73,30 +98,77 @@ $border-radius: 4px;
   /* box-shadow: 0 0 3px rgba(0, 0, 0, 0.5); */
   background: white;
   filter: drop-shadow(0 1px 1px rgba(0,0,0,0.5));
-  transform: translateY(-100%);
   padding: 0.5em 1em;
-  margin-top: -10px;
   max-width: 20em;
   word-break: break-all;
   &::before,&::after{
     content:'';
     display: block;
     border: 10px solid transparent;
-    border-top-color: $border-color;
     width: 0;
     height: 0;
     position: absolute;
-    top: 100%;
-    left: 10px;
   }
-  &::before{
-    border-top-color: $border-color;
-    top: 100%;
-
+  &.position-top{
+    transform: translateY(-100%);
+    margin-top: -10px;
+    &::before,&::after{
+      left: 10px;    
+    }
+    &::before{
+      border-top-color: $border-color;
+      top: 100%;
+    }
+    &::after{
+      border-top-color: white;
+      top: calc(100% - 1px);
+    }
   }
-  &::after{
-    border-top-color: white;
-    top: calc(100% - 1px);
+  &.position-bottom{
+    margin-top: 10px;
+    &::before,&::after{
+      left: 10px;    
+    }
+    &::before{
+      border-bottom-color: $border-color;
+      bottom: 100%;
+    }
+    &::after{
+      border-bottom-color: white;
+      bottom: calc(100% - 1px);
+    }
   }
+  &.position-left{
+    transform: translateX(-100%);
+    margin-left: -10px;
+    &::before,&::after{
+      transform: translateY(-50%);
+      top: 50%;    
+    }
+    &::before{
+      border-left-color: $border-color;
+      left: 100%;
+    }
+    &::after{
+      border-left-color: white;
+      left: calc(100% - 1px);
+    }
+  }
+  &.position-right{
+    margin-left: 10px;
+    &::before,&::after{
+      transform: translateY(-50%);
+      top: 50%;    
+    }
+    &::before{
+      border-right-color: $border-color;
+      right: 100%;
+    }
+    &::after{
+      border-right-color: white;
+      right: calc(100% - 1px);
+    }
+  }
+  
 }
 </style>
