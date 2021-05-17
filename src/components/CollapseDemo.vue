@@ -1,22 +1,17 @@
 <template>
-  <Collapse v-model:selected="selected">
-    <collapse-item title="标题1" name="1">内容1</collapse-item>
-    <collapse-item title="标题2" name="2">内容2</collapse-item>
-    <collapse-item title="标题3" name="3">内容3</collapse-item>
-    <collapse-item title="标题4" name="4">内容4</collapse-item>
-  </Collapse>
-  {{ selected }}
+  <Demo :component="CollapseDemo1" />
+  <Demo :component="CollapseDemo2" />
 </template>
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
-import Collapse from "../lib/Collapse.vue";
-import CollapseItem from "../lib/CollapseItem.vue";
+import { defineComponent } from "vue";
+import Demo from "./Demo.vue";
+import CollapseDemo1 from "./Collapse1.demo.vue";
+import CollapseDemo2 from "./Collapse2.demo.vue";
 
 export default defineComponent({
-  components: { Collapse, CollapseItem },
+  components: { Demo },
   setup() {
-    const selected = reactive(["1", "3"]);
-    return { selected };
+    return { CollapseDemo1, CollapseDemo2 };
   },
 });
 </script>

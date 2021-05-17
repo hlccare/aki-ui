@@ -16,5 +16,5 @@ const app = createApp(App)
 app.use(router)
 app.mount('#app')
 
-app.config.globalProperties.$bus = mitt()
+app.config.globalProperties.$bus = mitt
 

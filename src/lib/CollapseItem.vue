@@ -9,7 +9,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, getCurrentInstance, onMounted, ref } from "vue";
+import { defineComponent, inject, onMounted, ref } from "vue";
 import { Emitter } from "mitt";
 
 export default defineComponent({
@@ -25,9 +25,7 @@ export default defineComponent({
   },
   setup(props) {
     const open = ref(false);
-    const internalInstance = getCurrentInstance();
-    const bus: Emitter =
-      internalInstance.appContext.config.globalProperties.$bus;
+    const bus = inject<Emitter>("bus");
     onMounted(() => {
       bus.on("update:selected", (nameArray: string[]) => {
         if (nameArray.indexOf(props.name) >= 0) {
@@ -54,7 +52,7 @@ $grey: #ddd;
 $border-radius: 4px;
 .aki-collapse-item {
   > .aki-collapse-title {
-    border: 1px solid grey;
+    border: 1px solid $grey;
     margin-top: -1px;
     margin-left: -1px;
     margin-right: -1px;
