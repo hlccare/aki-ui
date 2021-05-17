@@ -69,6 +69,7 @@ $border-radius: 4px;
   }
   .aki-collapse-content {
     padding: 8px;
+    color: grey;
   }
 }
 </style>

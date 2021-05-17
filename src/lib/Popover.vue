@@ -122,6 +122,9 @@ $border-radius: 4px;
 .aki-popover {
   display: inline-block;
   position: relative;
+  & + & {
+    margin-left: 8px;
+  }
 }
 .aki-content-wrapper {
   z-index: 10;

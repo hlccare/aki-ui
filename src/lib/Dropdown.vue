@@ -33,8 +33,6 @@ export default {
 
     const dropdownContainer = ref(null);
     const dropdownLabel = ref(null);
-    // eslint:disable-next-line
-    provide(menuVisible, "menuVisible");
     const showMenu = () => {
       if (trigger === "hover" && !menuVisible.value) {
         menuVisible.value = true;
