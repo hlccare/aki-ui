@@ -1,14 +1,14 @@
 <demo>
-支持 click 触发
+选项支持 disabled / divided
 </demo>
 <template>
-  <Dropdown trigger="click">
+  <Dropdown>
     <span class="aki-dropdown-link"> 下拉菜单<i class="down"></i> </span>
     <template v-slot:dropdownMenu>
       <DropdownMenu>
-        <DropdownMenuItem>黄金糕</DropdownMenuItem>
+        <DropdownMenuItem disabled>黄金糕</DropdownMenuItem>
         <DropdownMenuItem>狮子头</DropdownMenuItem>
-        <DropdownMenuItem>螺蛳粉</DropdownMenuItem>
+        <DropdownMenuItem divided>螺蛳粉</DropdownMenuItem>
       </DropdownMenu>
     </template>
   </Dropdown>

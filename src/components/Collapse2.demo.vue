@@ -1,5 +1,5 @@
 <demo>
-常规使用
+支持 single 手风琴效果
 </demo>
 <template>
   <div>

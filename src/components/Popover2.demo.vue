@@ -1,16 +1,11 @@
+<demo>
+支持hover
+</demo>
 <template>
   <div>
     <Popover trigger="hover">
       <template v-slot:content>
-        <div>popover内容1</div>
-      </template>
-      <template v-slot:default>
-        <Button>点击</Button>
-      </template>
-    </Popover>
-    <Popover position="bottom" trigger="hover">
-      <template v-slot:content>
-        <div>popover内容2</div>
+        <div>内容</div>
       </template>
       <template v-slot:default>
         <Button>点击</Button>
@@ -18,7 +13,7 @@
     </Popover>
     <Popover position="left" trigger="hover">
       <template v-slot:content>
-        <div>popover内容2</div>
+        <div>内容</div>
       </template>
       <template v-slot:default>
         <Button>点击</Button>
@@ -26,7 +21,15 @@
     </Popover>
     <Popover position="right" trigger="hover">
       <template v-slot:content>
-        <div>popover内容2</div>
+        <div>内容</div>
+      </template>
+      <template v-slot:default>
+        <Button>点击</Button>
+      </template>
+    </Popover>
+    <Popover position="bottom" trigger="hover">
+      <template v-slot:content>
+        <div>内容</div>
       </template>
       <template v-slot:default>
         <Button>点击</Button>

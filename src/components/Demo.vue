@@ -1,6 +1,6 @@
 <template>
   <div class="demo">
-    <h2>标题</h2>
+    <h2>{{component.__sourceCodeTitle}}</h2>
     <div class="demo-component">
       <component :is="component" />
     </div>
@@ -17,7 +17,7 @@
 <script lang="ts">
 import Button from "../lib/Button.vue";
 import "prismjs";
-import "prismjs/themes/prism.css";
+import "prismjs/themes/prism-tomorrow.css";
 import { computed, ref } from "vue";
 const Prism = (window as any).Prism;
 

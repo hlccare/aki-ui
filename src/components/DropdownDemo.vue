@@ -1,17 +1,23 @@
 <template>
+<div>
+  <h1>Dropdown 示例</h1>
   <Demo :component="Dropdown1Demo" />
   <Demo :component="Dropdown2Demo" />
+  <Demo :component="Dropdown3Demo" />
+</div>
 </template>
 
 <script lang="ts">
 import Demo from "./Demo.vue";
 import Dropdown1Demo from "./Dropdown1.demo.vue";
 import Dropdown2Demo from "./Dropdown2.demo.vue";
+import Dropdown3Demo from "./Dropdown3.demo.vue";
+
 
 export default {
   components: { Demo },
   setup() {
-    return { Dropdown1Demo, Dropdown2Demo };
+    return { Dropdown1Demo, Dropdown2Demo, Dropdown3Demo };
   },
 };
 </script>

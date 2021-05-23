@@ -1,19 +1,13 @@
+<demo>
+基础使用 支持多方位
+</demo>
 <template>
   <div>
     <Popover>
-      <template v-slot:content="slotProp">
-        <div>
-          popover内容1
-          <Button @click="slotProp.close">点击关闭</Button>
-        </div>
-      </template>
-      <template v-slot:default>
-        <Button>点击</Button>
-      </template>
-    </Popover>
-    <Popover position="bottom">
       <template v-slot:content>
-        <div>popover内容2</div>
+        <div>
+          内容
+        </div>
       </template>
       <template v-slot:default>
         <Button>点击</Button>
@@ -21,7 +15,7 @@
     </Popover>
     <Popover position="left">
       <template v-slot:content>
-        <div>popover内容2</div>
+        <div>内容</div>
       </template>
       <template v-slot:default>
         <Button>点击</Button>
@@ -29,7 +23,15 @@
     </Popover>
     <Popover position="right">
       <template v-slot:content>
-        <div>popover内容2</div>
+        <div>内容</div>
+      </template>
+      <template v-slot:default>
+        <Button>点击</Button>
+      </template>
+    </Popover>
+    <Popover position="bottom">
+      <template v-slot:content>
+        <div>内容</div>
       </template>
       <template v-slot:default>
         <Button>点击</Button>

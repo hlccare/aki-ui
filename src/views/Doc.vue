@@ -116,7 +116,7 @@ $aside-zindex: 10;
 }
 aside {
   box-shadow: 0 0 15px rgb(223, 222, 222);
-  background: lightblue;
+  background: white;
   width: 150px;
   padding: 16px 0;
   position: fixed;
@@ -139,7 +139,8 @@ aside {
         }
       }
       .router-link-active {
-        background: white;
+        background: lightseagreen;
+        color: white;
       }
     }
   }

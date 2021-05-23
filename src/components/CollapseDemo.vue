@@ -1,6 +1,9 @@
 <template>
-  <Demo :component="CollapseDemo1" />
-  <Demo :component="CollapseDemo2" />
+    <div>
+        <h1>Collapse 示例</h1>
+        <Demo :component="CollapseDemo1" />
+        <Demo :component="CollapseDemo2" />
+    </div>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";

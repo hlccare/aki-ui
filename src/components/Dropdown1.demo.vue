@@ -9,8 +9,6 @@
         <DropdownMenuItem>黄金糕</DropdownMenuItem>
         <DropdownMenuItem>狮子头</DropdownMenuItem>
         <DropdownMenuItem>螺蛳粉</DropdownMenuItem>
-        <DropdownMenuItem disabled>双皮奶</DropdownMenuItem>
-        <DropdownMenuItem divided>蚵仔煎</DropdownMenuItem>
       </DropdownMenu>
     </template>
   </Dropdown>
