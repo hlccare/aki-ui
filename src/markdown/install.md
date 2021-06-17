@@ -1,5 +1,7 @@
 # 安装
 
+**注：目前暂未发布至NPM**
+
 打开终端运行下列命令：
 ```sh
 npm install aki-ui

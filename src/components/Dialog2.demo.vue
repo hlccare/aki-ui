@@ -1,5 +1,5 @@
 <demo>
-一键打开 Dialog
+动态创建 Dialog
 </demo>
 <template>
   <div>
